@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Items from '../components/description'
 import Navbar from "../components/Navbar";
 import AddItems from "../components/Additems";
+import System from "../api/system"
 
 function Home(){
     const [items, setItems] = useState([])
@@ -24,9 +25,11 @@ function Home(){
           <br/><br/><br/><br/>
           <AddItems/>
           </div>
+          <div className="items-flex">
           {items && items.map((stores)=>(
             <Items key={stores._id} stores={stores}/>
           ))}
+          </div>
         </div>
     );
 }

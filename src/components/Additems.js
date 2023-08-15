@@ -1,4 +1,5 @@
 import { useState } from "react";
+import FileBase64 from 'react-file-base64'
 
 function AddItems(){
 
@@ -6,13 +7,14 @@ function AddItems(){
     const [prize, setPrize] = useState('')
     const [description, setDescription] = useState('')
     const [phone, setPhone] = useState('')
+    const [image, setImage] = useState('')
     const [error, setError] = useState('')
 
     async function handlesubmit(e){
 
         e.preventDefault()
 
-        const items = {title,prize,description,phone}
+        const items = {title,prize,description,phone,image}
 
         const response = await fetch('/api/items',{
             method : 'POST',
@@ -41,6 +43,7 @@ function AddItems(){
     }
 
     return(
+        <div>
         <form className="submit" onSubmit={handlesubmit}>
            <label>Enter your product name</label>
            <br/><br/> 
@@ -58,8 +61,14 @@ function AddItems(){
            <br/><br/> 
            <textarea className="des" rows={1} onChange={e => setPhone(e.target.value)}/>
            <br/><br/>
+           <label>Select The Image</label>
+           <br/><br/> 
+           <FileBase64 multiple={ false } onDone={({base64})=> setImage(base64)}/>
+           <br/><br/> 
            <button className="submit-btn">Submit</button>
         </form>
+        <br/><br/><br/>
+        </div>
     )
 
 }
