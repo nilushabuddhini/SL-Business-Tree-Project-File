@@ -4,8 +4,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import System from './api/system';
 import GetOrder from './api/getOrder'
 
+
 function App() {
   return(
+    
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home/>}/>
@@ -13,6 +15,7 @@ function App() {
         <Route path='/order/back/getorders' element={<GetOrder/>}/>
       </Routes>
     </BrowserRouter>
+
   )
 }
 

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Items from '../components/description'
 import Navbar from "../components/Navbar";
 import AddItems from "../components/Additems";
-import System from "../api/system"
 
 function Home(){
     const [items, setItems] = useState([])

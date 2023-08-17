@@ -28,6 +28,7 @@ function PostSystem(){
             setPhonenum('')
         }
         window.location.replace('http://localhost:3000/')
+        alert('Your Order added sucssesfully')
     }
     
     return(
