@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import GetSystem from "./components/getSystem"
 import PostSystem from "./components/postSystem";
 
 function System(){

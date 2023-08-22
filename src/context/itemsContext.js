@@ -14,18 +14,16 @@ export const ItemsReducer = (state,action) => {
                 items:[action.payload, ...state.items]
                 }
     
-            default:
+              default:
                 return state
     }
 }
 
 export const ItemsContextProvider = ({ children }) => {
 
-    const [state,dispatch] = useReducer(ItemsReducer, {
-        items: null
+    const [state, dispatch] = useReducer(ItemsReducer, {
+        items: []
     })
-
-    dispatch({type: 'SET_ITEMS' , payload: [{}, {}] })
 
     return(
         <ItemsContext.Provider value={{...state, dispatch}}>

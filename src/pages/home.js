@@ -1,29 +1,34 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Items from '../components/description'
-import Navbar from "../components/Navbar";
 import AddItems from "../components/Additems";
+import { useItemsContext } from "../hooks/useitemscontext";
+import { useAuthContext } from '../hooks/useAuthContext'
 
 function Home(){
-    const [items, setItems] = useState([])
+    const {items, dispatch} = useItemsContext()
+    const {user} = useAuthContext()
 
     useEffect(() =>{
       const fetchitems = async ()=>{
-        const response = await fetch('/api/items')
+        const response = await fetch('/api/items', {
+          headers:{
+            'Authorization': `Bearer ${user.token}`
+          }
+        })
         const json = await response.json()
   
         if(response.ok){
-          setItems(json)
+          dispatch({type: 'SET_ITEMS', payload: json})
         }
       }
-      fetchitems()
-    },[])
+
+      if(user){
+        fetchitems()
+      }
+      
+    },[dispatch, user])
     return (
         <div className="hello">
-          <div>
-          <Navbar/>
-          <br/><br/><br/><br/>
-          <AddItems/>
-          </div>
           <div className="items-flex">
           {items && items.map((stores)=>(
             <Items key={stores._id} stores={stores}/>

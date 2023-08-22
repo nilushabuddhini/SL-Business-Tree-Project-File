@@ -5,12 +5,13 @@ function PostSystem(){
     const [adress, setAdress] = useState('')
     const [idnum, setIdnum] = useState('')
     const [phonenum, setPhonenum] = useState('')
+    const [order, setOrder] = useState('http://localhost:5000/'+localStorage.getItem('order'))
 
     async function systemsub(e){
 
         e.preventDefault()
 
-        const systems = {adress,idnum,phonenum}
+        const systems = {adress,idnum,phonenum,order}
 
         const response = await fetch('/api/system', {
             method:'POST',
@@ -26,9 +27,11 @@ function PostSystem(){
             setAdress('')
             setIdnum('')
             setPhonenum('')
+
         }
         window.location.replace('http://localhost:3000/')
         alert('Your Order added sucssesfully')
+
     }
     
     return(
@@ -44,7 +47,6 @@ function PostSystem(){
             <label>Enter your phone Number</label>
             <br/><br/><br/>
             <textarea onChange={e=>setPhonenum(e.target.value)} className="phone-txt"/>
-            <br/><br/><br/>
             <button className="s-sub">Submit</button>
         </form>
     )
