@@ -3,6 +3,8 @@ import Items from '../components/description'
 import { useItemsContext } from "../hooks/useitemscontext";
 import { useAuthContext } from '../hooks/useAuthContext';
 import Carousel from '../components/carousel'
+import Footer from "../components/footer";
+import { Status } from '../contents/status'
 
 function Home(){
     const {items, dispatch} = useItemsContext()
@@ -31,7 +33,7 @@ function Home(){
         <div>
 
           <Carousel/>
-        <div className="album py-5 bg-body-tertiary">
+        <div className="album py-5 bg-body-tertiary" id="items-album">
         <div className="container">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
@@ -41,6 +43,7 @@ function Home(){
         </div>
         </div>
         </div>
+        <Footer/>
 
 
         </div>
