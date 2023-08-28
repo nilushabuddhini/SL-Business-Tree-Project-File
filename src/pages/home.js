@@ -12,7 +12,7 @@ function Home(){
 
     useEffect(() =>{
       const fetchitems = async ()=>{
-        const response = await fetch('http://localhost:5000/api/items', {
+        const response = await fetch('https://sl-buisness-tree-backend.onrender.com/api/items', {
           headers:{
             'Authorization': `Bearer ${user.token}`
           }

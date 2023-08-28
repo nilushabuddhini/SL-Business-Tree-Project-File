@@ -10,7 +10,7 @@ export const useSignup = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('http://localhost:5000/api/users/signup', {
+        const response = await fetch('https://sl-buisness-tree-backend.onrender.com/api/users/signup', {
             method: 'POST',
             headers: { 'Content-Type':'application/json' },
             body: JSON.stringify({email, password})

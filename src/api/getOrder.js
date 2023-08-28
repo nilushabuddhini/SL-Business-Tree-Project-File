@@ -8,7 +8,7 @@ function GetOrder(){
     useEffect(()=>{
 
         const fetchsystem = async ()=>{
-            const response = await fetch('http://localhost:5000/api/system')
+            const response = await fetch('https://sl-buisness-tree-backend.onrender.com/api/system')
             const json = await response.json()
 
             if(response.ok){
