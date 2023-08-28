@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Items from '../components/description'
-import AddItems from "../components/Additems";
 import { useItemsContext } from "../hooks/useitemscontext";
-import { useAuthContext } from '../hooks/useAuthContext'
+import { useAuthContext } from '../hooks/useAuthContext';
+import Carousel from '../components/carousel'
 
 function Home(){
     const {items, dispatch} = useItemsContext()
@@ -10,7 +10,7 @@ function Home(){
 
     useEffect(() =>{
       const fetchitems = async ()=>{
-        const response = await fetch('/api/items', {
+        const response = await fetch('http://localhost:5000/api/items', {
           headers:{
             'Authorization': `Bearer ${user.token}`
           }
@@ -28,12 +28,21 @@ function Home(){
       
     },[dispatch, user])
     return (
-        <div className="hello">
-          <div className="items-flex">
+        <div>
+
+          <Carousel/>
+        <div className="album py-5 bg-body-tertiary">
+        <div className="container">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
           {items && items.map((stores)=>(
             <Items key={stores._id} stores={stores}/>
           ))}
-          </div>
+        </div>
+        </div>
+        </div>
+
+
         </div>
     );
 }

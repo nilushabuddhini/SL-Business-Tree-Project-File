@@ -28,7 +28,7 @@ function AddItems(){
             return
         }
 
-        const response = await fetch('/api/items',{
+        const response = await fetch('http://localhost:5000/api/items',{
             method : 'POST',
             body : JSON.stringify(items),
             headers : {
@@ -55,36 +55,36 @@ function AddItems(){
             dispatch({type: 'CREATE_ITEMS' ,  payload: json})
         }
 
-        window.location.replace('/')
-
-
+        if(!error){
+            window.location.replace('/')
+        }
     }
 
     return(
-        <div>
+        <div className="container" style={{ textAlign:'center' }}>
         <form className="submit" onSubmit={handlesubmit}>
            <h2>Add your item from here</h2>
            <label>Enter your product name</label>
            <br/><br/> 
-           <textarea className="product" rows={2} onChange={e => setTitle(e.target.value)}/>
+           <textarea className="form-control" style={{ resize:'none ', textAlign:'center'}} rows={2} onChange={e => setTitle(e.target.value)}/>
            <br/><br/> 
            <label>Enter The prize</label>
            <br/><br/> 
-           <input type="number" onChange={e => setPrize(e.target.value)} className="prize"/>
+           <input type="number" onChange={e => setPrize(e.target.value)} className="form-control" style={{ textAlign:'center' }}/>
            <br/><br/> 
            <label>Type about your product</label>
            <br/><br/> 
-           <textarea className="des" rows={4} onChange={e => setDescription(e.target.value)}/>
+           <textarea className="form-control" style={{ resize:'none ', textAlign:'center'}} rows={4} onChange={e => setDescription(e.target.value)}/>
            <br/><br/>
            <label>Enter Your phone number</label>
            <br/><br/> 
-           <textarea className="des" rows={1} onChange={e => setPhone(e.target.value)}/>
+           <textarea className="form-control" style={{ resize:'none ', textAlign:'center'}} rows={1} onChange={e => setPhone(e.target.value)}/>
            <br/><br/>
            <label>Select The Image</label>
            <br/><br/> 
-           <FileBase64 multiple={ false } onDone={({base64})=> setImage(base64)}/>
+           <FileBase64 multiple={ false } onDone={({base64})=> setImage(base64)} className="form-control" id="forFile"/>
            <br/><br/>
-           <button className="submit-btn">Submit</button>
+           <button className="btn btn-outline-success">Submit</button>
            <br /><br />
            {error && <div className="error">{error}</div>}
         </form>
