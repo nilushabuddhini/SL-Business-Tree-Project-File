@@ -1,4 +1,5 @@
 import PostSystem from "./components/postSystem";
+import { Link } from "react-router-dom";
 
 function System(){
 

@@ -9,12 +9,11 @@ function Items(){
 
     return (
 
-        <div class="card mb-3 position-relative top-100 start-50 translate-middle" style={{ maxWidth:'540px' }}>
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src={id} class="img-fluid rounded-start " alt="..."/>
+      <div class="col m-auto" >
+  <div class="card shadow-sm">
+    <div class="">
+      <img src={id} class="img-fluid rounded-start imgdes" alt="..."/>
     </div>
-    <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">{ti}</h5>
     <p class="card-text">prize : {pr}</p>
@@ -22,7 +21,7 @@ function Items(){
       </div>
     </div>
   </div>
-</div>
+
     )
 }
 

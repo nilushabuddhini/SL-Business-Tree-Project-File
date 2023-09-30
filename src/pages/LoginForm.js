@@ -1,16 +1,21 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const {login, isloading, error} = useLogin()
+    const [verifying, setVerifying] = useState(false)
 
     const handleSubmit = async (e)=>{
         e.preventDefault()
 
+        setVerifying(true)
         await login(email, password);
+        setVerifying(false)
     }
 
     return(
@@ -51,6 +56,17 @@ const Login = () => {
 //     <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p>
 //   </form>
 //   </main>
+<div>
+<div>
+                <Helmet>
+                <meta charSet="utf-8" />
+                <meta name="description" content="Sl Buisness Tree is a buisness website developed for grow your buisness up. You can place your order for your favourite items and you can add it to your cart. You can comment us on the chat page. Please comment our page and share it with your friends."/>
+                <meta name="keywords" content="SL Business Tree"/>
+                <meta name="author" content="Sl Business Tree"/>
+
+                <title>Login | SL Business Tree</title>
+                </Helmet>
+            </div>
 <div class="modal-content rounded-4 shadow">
       <div class="modal-header p-5 pb-4 border-bottom-0">
         <h1 class="fw-bold mb-0 fs-2">Log in</h1>
@@ -69,11 +85,20 @@ const Login = () => {
           <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Log in</button>
           <small class="text-body-secondary">By clicking Log in, you agree to the terms of use.</small>
           <hr class="my-4"/>
+          <div className="text-end">{verifying===true?
+            <button class="btn btn-primary" type="button" disabled>
+              <span class="spinner-border spinner-border-sm mx-2 text-warning" role="status" aria-hidden="true"></span>
+                Verifying...
+            </button>
+          :null}
+          </div>
           {error && <div>{error}</div>}
 
 
         </form>
+        <p>New to SL business tree? try <Link to='/signup'>Sign-up</Link></p>
       </div>
+    </div>
     </div>
     )
 }

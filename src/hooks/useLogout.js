@@ -12,7 +12,7 @@ export const useLogout = () => {
         localStorage.removeItem('user')
 
         //update the logout user
-        dispatch({type: 'LOGOUT'})
+        dispatch({type:'LOGOUT'})
         itemsDispatch({type: 'SET_ITEMS', payload: null})
     }
 

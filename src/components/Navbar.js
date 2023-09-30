@@ -1,24 +1,36 @@
 import { Link } from "react-router-dom"
 import { useLogout } from "../hooks/useLogout"
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useState, useEffect } from "react";
 
 function Navbar(){
 
     const { logout } = useLogout()
     const { user } = useAuthContext()
 
-    const serch = async (e) => {
-      console.log(e.target.value)
-    }
+    const [carts, setCarts] = useState([])
+    
+    useEffect(()=>{
+        const federation = async ()=>{
+            const response = await fetch('https://sl-buisness-tree-backend.onrender.com/api/cart', {
+                headers:{
+                    'Authorization':`Bearer ${user.token}`
+                }
+            })
+            const json = await response.json()
+
+            if(response.ok){
+                setCarts(json)
+            }
+        }
+        if(user){
+          federation()
+        }
+        
+    },[user])
 
     const handleClick = () => {
         logout()
-    }
-    const handle = () => {
-        window.location.replace('http://localhost:3000/login')
-    }
-    const handleing = () => {
-        window.location.replace('http://localhost:3000/signup')
     }
 
     return(
@@ -57,43 +69,94 @@ function Navbar(){
   //   </header>
   // </div>
   //           </div>
-  <header className="p-3 text-bg-dark">
-    <div className="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <img src="./icon.jpg" alt="" className="rounded-circle" style={{ width:'50px' }}/>
-          <h5 style={{ color:'white' }}>SL buisness Tree</h5>
-        </a>
+//   <header className="p-3 text-bg-dark pos fixed-top">
+//     <div className="container">
+//       <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+//         <a href="/" className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+//           <img src="./icon.jpg" alt="" className="rounded-circle" style={{ width:'50px' }}/>
+//           <h5 style={{ color:'white' }}>SL business Tree</h5>
+//         </a>
 
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" className="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="http://localhost:3000/global" class="nav-link px-2 text-white">Add your product</a></li>
-          <li><a href="#" className="nav-link px-2 text-white">Orders</a></li>
-          <li><a href="#" className="nav-link px-2 text-white">Chats</a></li>
-          <li><a href="#" className="nav-link px-2 text-white">About</a></li>
-        </ul>
+//         <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+//           <li><a href="/" className="nav-link px-2 text-secondary">Home</a></li>
+//           <li><Link to='/dashboard' className="nav-link px-2 text-white">Dashboard</Link></li>
+//           <li><a href="#" className="nav-link px-2 text-white">Orders</a></li>
+//           <li><Link to='/cart' className="nav-link px-2 text-white">Cart</Link></li>
+//           <li><a href="#" className="nav-link px-2 text-white">Chats</a></li>
+//           <li><a href="#" className="nav-link px-2 text-white">About</a></li>
+//         </ul>
 
-        <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input type="search" className="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search" onChange={serch}/>
-        </form>
+//         <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+//           <input type="search" className="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search" onChange={serch}/>
+//         </form>
 
-        {!user && (
+//         {!user && (
 
-<div class="text-end">
-<button type="button" className="btn btn-outline-light me-2" onClick={handle}>Login</button>
-<button type="button" className="btn btn-warning" onClick={handleing}>Sign-up</button>
-</div>
-        )}
+// <div className="text-end">
+// <Link to='/login' className="btn btn-outline-primary me-2">Login</Link>
+// <Link to='/signup' className="btn btn-warning">Sign-up</Link>
+// </div>
+//         )}
+//         {user && (
+//           <div className="text-end">
+//             <p className="mt-3"><span>{user.email} : {user.email == 'slbuisnesstree@samern.dev'||user.email == 'slbuisnesstree@gmail.com'? <small style={{ color: 'green' }}>developer</small>:<small style={{ color: 'red' }}>user</small>}</span> <button type="button" className="btn btn-outline-primary" onClick={handleClick}>Logout</button></p>
+//           </div>
+//         )}
+
+
+//       </div>
+//     </div>
+//   </header>
+<header data-bs-theme="dark">
+<div className="collapse text-bg-dark" id="navbarHeader">
+  <div className="container">
+    <div className="row">
+      <div className="col-sm-8 col-md-7 py-4">
+      <h4 className="text-success">Welcome to SL Business Tree</h4>
+      <br />
+      <div className="d-flex ml-2">
+      <Link to='/' className="text-decoration-none text-white mx-3" style={{ fontSize:'18px' }}>Home</Link>
+      <br /><br />
+      <Link to='/dashboard' className="text-decoration-none text-white mx-3" style={{ fontSize:'18px' }}>Dashboard</Link>
+      <br /><br />
+
+      <Link to='/cart' className="text-decoration-none text-white mx-3" style={{ fontSize:'18px' }}>Cart<sup class="badge badge-pill bg-danger align-text-bottom text-dark rounded-circle">{carts.length}</sup></Link>
+      
+      <br /><br />
+      <Link to='/chat' className="text-decoration-none text-white mx-3" style={{ fontSize:'18px' }}>Chat</Link>
+      </div>
+      </div>
+      <div className="col-sm-4 offset-md-1 py-4">
+              {!user && (
+
+<div className="text-end">
+<Link to='/login' className="btn btn-outline-primary me-2">Login</Link>
+<Link to='/signup' className="btn btn-warning">Sign-up</Link>
+ </div>
+         )}
         {user && (
           <div className="text-end">
-            <p className="mt-3"><span>{user.email} : {user.email == 'slbuisnesstree@samern.dev'? <small style={{ color: 'green' }}>developer</small>:<small style={{ color: 'red' }}>user</small>}</span> <button type="button" className="btn btn-outline-primary" onClick={handleClick}>Logout</button></p>
-          </div>
-        )}
-
+             <p className="mt-3"><span>{user.email} : {user.email == 'slbusinesstree@slbt.dev'||user.email == 'slbusinesstree@gmail.com'? <small style={{ color: 'green' }}>developer</small>:<small style={{ color: 'red' }}>user</small>}</span> <button type="button" className="btn btn-outline-primary" onClick={handleClick}>Logout</button></p>
+           </div>
+      )}
 
       </div>
     </div>
-  </header>
+  </div>
+</div>
+<div className="navbar navbar-dark bg-dark shadow-sm">
+  <div className="container">
+    <a href="/" className="navbar-brand d-flex align-items-center">
+      <img src="./icon.jpg" alt="" className="rounded-circle" style={{ width:'60px'}}/>
+      <strong className="ml-3">SL Business Tree</strong>
+    </a>
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</div>
+</header>
+
     )
 }
 

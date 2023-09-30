@@ -1,3 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Italianno&family=Roboto+Serif:wght@300&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 .imgdes{
     height: 300px;
+}
+.imgdesc{
+    height: 150%;
+}
+
+.font-change{
+    font-family: 'Italianno', cursive; 
+    font-weight: 400;
+    font-size: 50px;
+}
+.tserch{
+    cursor: text;
+}
+
+.search-icon {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+input[type=file]::file-selector-button{
+    border:none;
+    border-radius: 20px;
+    background-color: lime;
+    padding: 8px 15px;
+}
+
+.card-mage{
+    transition: all 0.3s;
+}
+
+.card-mage:hover{
+    transform: scale(0.95);
+}
+.imgdes{
+    transition: all 0.3s;
+}
+
+.imgdes:hover{
+    transform: scale(0.95);
 }

@@ -13,6 +13,10 @@ export const ItemsReducer = (state,action) => {
                 return{
                 items:[action.payload, ...state.items]
                 }
+            case 'DELETE_ITEMS':
+                return{
+                    items:state.items.filter((i) => i._id !== action.payload._id)
+                }
     
               default:
                 return state
